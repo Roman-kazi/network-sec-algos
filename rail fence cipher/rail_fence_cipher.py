@@ -4,7 +4,7 @@ def rail_matrix(text, rows):
     arr = np.empty((rows, len(text)), dtype='U') # 'U' for unicode
     i = 0 # i for rows
     j = 0 # for columns
-    #index = 0
+
     direction_down = True
     for x in text:
         if i == (rows-1):
@@ -21,7 +21,7 @@ def rail_matrix(text, rows):
     return arr
 
 def read_rail_matrix(arr, n, col_wise = True):
-    # n = len of text
+    # n = len of text (cipher or plain)
     # returns a string combined from the rail matrix
     text = []
 
@@ -55,7 +55,6 @@ def encryption(pt, rows):
     arr = rail_matrix(pt, rows)
     # reading matrix and combining ct
     ct = read_rail_matrix(arr, len(pt))
-    #print(ct)
     return ct
 
 
@@ -65,9 +64,8 @@ def decryption(ct, rows):
     index = 0 # index of text
     dash = '_'*len(ct)
     arr = rail_matrix(dash, rows)
-    #print(arr)
-    # now filling row wise in place of _ with letters
 
+    # now filling row wise in place of _ with letters
     for i in range(len(arr)): # rows
         for j in range(len(ct)): # columns
             if arr[i][j] == '_':
